@@ -1,9 +1,27 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+const count = ref<string | number>(0)
+
+interface IUser {
+  name: string
+  age: number
+}
+const user: IUser = reactive({
+  name: "Vite",
+  age: 18,
+})
+const increase = () => {
+  if (typeof count.value === "number") {
+    count.value++
+  }
+  user.age++
+}
 </script>
 
 <template>
   <div>
+    <h1>{{ count }}</h1>
+    <h1>{{ user.age }}</h1>
+    <button type="button" @click="increase">increase</button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
@@ -11,7 +29,6 @@ import HelloWorld from './components/HelloWorld.vue'
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style scoped>
