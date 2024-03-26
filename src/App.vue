@@ -7,8 +7,16 @@ interface IUser {
 }
 const user: IUser = reactive({
   name: "Vite",
-  age: 18,
+  age: 8,
 })
+
+const buttonStatus = computed(() => {
+  return {
+    disabled: user.age < 10,
+    text: user.age < 10 ? "未滿10歲不可參加" : "可以參與",
+  }
+})
+
 const increase = () => {
   if (typeof count.value === "number") {
     count.value++
@@ -22,6 +30,9 @@ const increase = () => {
     <h1>{{ count }}</h1>
     <h1>{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>
+    <button type="button" :disabled="buttonStatus.disabled">
+      {{ buttonStatus.text }}
+    </button>
     <a href="https://vitejs.dev" target="_blank">
       <img src="/vite.svg" class="logo" alt="Vite logo" />
     </a>
