@@ -17,6 +17,32 @@ const buttonStatus = computed(() => {
   }
 })
 
+watch(
+  count,
+  (newVal, oldVal) => {
+    console.log("count changed", newVal, oldVal)
+    document.title = `count is ${newVal}`
+    console.log("the dom ", document.getElementById("user")?.innerHTML)
+  },
+  { flush: "post" }
+  // { immediate: true }
+)
+
+watch(
+  () => user.age,
+  (newVal, oldVal) => {
+    console.log("user.age changed", newVal, oldVal)
+  }
+)
+
+watch(user, (newVal, oldVal) => {
+  console.log("user changed", newVal, oldVal)
+})
+
+watch([count, () => user.age], ([count, age], [oldCount, oldAge]) => {
+  console.log("count and user.age changed", count, age, oldCount, oldAge)
+})
+
 const increase = () => {
   if (typeof count.value === "number") {
     count.value++
@@ -28,7 +54,7 @@ const increase = () => {
 <template>
   <div>
     <h1>{{ count }}</h1>
-    <h1>{{ user.age }}</h1>
+    <h1 id="user">{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>
     <button type="button" :disabled="buttonStatus.disabled">
       {{ buttonStatus.text }}
