@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const count = ref<string | number>(0)
+const headLine = ref<null | HTMLElement>(null)
 
 interface IUser {
   name: string
@@ -49,12 +50,22 @@ const increase = () => {
   }
   user.age++
 }
+
+// life cycle
+console.log("in setup: ", headLine.value)
+onMounted(() => {
+  console.log("mounted: ", headLine.value?.innerHTML)
+})
+
+onUpdated(() => {
+  console.log("updated: ", document.getElementById("user")?.innerHTML)
+})
 </script>
 
 <template>
   <div>
     <h1>{{ count }}</h1>
-    <h1 id="user">{{ user.age }}</h1>
+    <h1 id="user" ref="headLine">{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>
     <button type="button" :disabled="buttonStatus.disabled">
       {{ buttonStatus.text }}
