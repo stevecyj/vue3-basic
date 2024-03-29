@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import MyProfile from "./components/MyProfile.vue"
+
 const count = ref<string | number>(0)
 const headLine = ref<null | HTMLElement>(null)
 
@@ -76,6 +78,7 @@ onUpdated(() => {
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
+    <MyProfile :name="user.name" :age="user.age" />
   </div>
 </template>
 
