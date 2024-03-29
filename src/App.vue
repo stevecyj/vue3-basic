@@ -78,7 +78,7 @@ onUpdated(() => {
     <a href="https://vuejs.org/" target="_blank">
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
-    <MyProfile :name="user.name" :age="user.age" />
+    <MyProfile :name="user.name" :age="user.age" :user="user" />
   </div>
 </template>
 

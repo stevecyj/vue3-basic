@@ -1,4 +1,8 @@
 <script setup lang="ts">
+interface IUser {
+  name: string
+  age: number
+}
 const props = defineProps({
   name: {
     type: String,
@@ -8,9 +12,13 @@ const props = defineProps({
     type: Number,
     required: true,
   },
+  user: {
+    type: Object as PropType<IUser>,
+    required: true,
+  },
 })
 
-const doubleAge = computed(() => props.age * 2)
+const doubleAge = computed(() => props.user.age * 2)
 </script>
 
 <template>
