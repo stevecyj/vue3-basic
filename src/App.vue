@@ -10,14 +10,30 @@ interface IUser {
   name: string
   age: number
 }
+
+// interface IDogResult {
+//   message: string
+//   status: string
+// }
+
+interface ITodoResult {
+  title: string
+}
+
 const user: IUser = reactive({
   name: "Vite",
   age: 8,
 })
 
 const { x, y } = useMousePosition()
-const { result, loading } = useURLLoader(
-  "https://dog.ceo/api/breeds/image/random"
+
+// const { result, loading } = useURLLoader<ITodoResult>(
+//   "https://dog.ceo/api/breeds/image/random"
+// )
+
+// https://jsonplaceholder.typicode.com/todos/1
+const { result, loading } = useURLLoader<ITodoResult>(
+  "https://jsonplaceholder.typicode.com/todos/1"
 )
 
 const buttonStatus = computed(() => {
@@ -81,7 +97,8 @@ onUpdated(() => {
       <h1>Mouse Position: x:{{ x }}, y:{{ y }}</h1>
     </div>
     <h1 v-if="loading">Loading ...</h1>
-    <img v-else :src="result.message" alt="" />
+    <!-- <img v-else :src="result?.message" alt="" /> -->
+    <h1 v-else>{{ result?.title }}</h1>
     <h1>{{ count }}</h1>
     <h1 id="user" ref="headLine">{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>

@@ -1,13 +1,13 @@
 import axios from "axios"
 
-interface IData {
-  result: any
+interface IData<T> {
+  result: null | T
   loading: boolean
   error: any
 }
 
-const useURLLoader = (url: string) => {
-  const data: IData = reactive({
+const useURLLoader = <T = any>(url: string) => {
+  const data: IData<T> = reactive({
     result: null,
     loading: true,
     error: null,
