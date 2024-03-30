@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import MyProfile from "./components/MyProfile.vue"
+import MyProfile from "@components/MyProfile.vue"
+import useMousePosition from "@hooks/useMousePosition"
 
 const count = ref<string | number>(0)
 const headLine = ref<null | HTMLElement>(null)
@@ -12,6 +13,8 @@ const user: IUser = reactive({
   name: "Vite",
   age: 8,
 })
+
+const { x, y } = useMousePosition()
 
 const buttonStatus = computed(() => {
   return {
@@ -70,6 +73,9 @@ onUpdated(() => {
 
 <template>
   <div>
+    <div>
+      <h1>Mouse Position: x:{{ x }}, y:{{ y }}</h1>
+    </div>
     <h1>{{ count }}</h1>
     <h1 id="user" ref="headLine">{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>
