@@ -2,6 +2,7 @@
 import MyProfile from "@components/MyProfile.vue"
 import useMousePosition from "@hooks/useMousePosition"
 import useURLLoader from "./hooks/useURLLoader"
+import { langKey } from "./keys"
 
 const count = ref<string | number>(0)
 const headLine = ref<null | HTMLElement>(null)
@@ -24,6 +25,13 @@ const user: IUser = reactive({
   name: "Vite",
   age: 8,
 })
+
+// 全域使用
+const lang = ref("en")
+const changeLang = (type: string) => {
+  lang.value = type
+}
+provide(langKey, lang)
 
 const { x, y } = useMousePosition()
 
@@ -93,6 +101,8 @@ onUpdated(() => {
 
 <template>
   <div>
+    <button @click="changeLang('zh')">change lang zh</button>
+    <button @click="changeLang('en')">change lang en</button>
     <div>
       <h1>Mouse Position: x:{{ x }}, y:{{ y }}</h1>
     </div>

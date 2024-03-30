@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import HelloWorld from "./HelloWorld.vue"
+
 interface IUser {
   name: string
   age: number
@@ -26,6 +28,7 @@ const toggleHidden = () => {
 
 <template>
   <div class="profile-component">
+    <HelloWorld msg="Hello from profile" />
     <h1>Name: {{ name }}</h1>
     <h1 v-if="!isHidden">Age: {{ age }}</h1>
     <h1 v-if="!isHidden">DoubleAge: {{ doubleAge }}</h1>
