@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import { ref } from "vue"
-import { langKey } from "../keys"
+import { langKey, userKey } from "../keys"
 
 defineProps<{ msg: string }>()
 
-const lang = inject(langKey)
-
+const langDefault = ref("en")
+const lang = inject(langKey, langDefault)
+const currentUser = inject(userKey)
 const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }} - {{ lang }}</h1>
+  <h1>{{ msg }} - {{ lang }} - {{ currentUser && currentUser.name }}</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
