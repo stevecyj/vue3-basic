@@ -3,24 +3,16 @@ interface IUser {
   name: string
   age: number
 }
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
-  },
-  age: {
-    type: Number,
-    required: true,
-  },
-  user: {
-    type: Object as PropType<IUser>,
-    required: true,
-  },
-})
+
+const props = withDefaults(
+  defineProps<{ name: string; age: number; user?: IUser }>(),
+  { name: "Vite", age: 8, user: () => ({ name: "Vite", age: 8 }) }
+)
 
 const isHidden = ref(false)
 
 const doubleAge = computed(() => props.user.age * 2)
+
 const toggleHidden = () => {
   isHidden.value = !isHidden.value
   emit("change", isHidden.value)
