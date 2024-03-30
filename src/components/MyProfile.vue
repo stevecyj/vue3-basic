@@ -13,12 +13,15 @@ const isHidden = ref(false)
 
 const doubleAge = computed(() => props.user.age * 2)
 
+interface IEvents {
+  (e: "change", hidden: boolean): void
+}
+const emit = defineEmits<IEvents>()
+
 const toggleHidden = () => {
   isHidden.value = !isHidden.value
   emit("change", isHidden.value)
 }
-
-const emit = defineEmits(["change"])
 </script>
 
 <template>
