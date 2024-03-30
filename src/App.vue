@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import MyProfile from "@components/MyProfile.vue"
 import useMousePosition from "@hooks/useMousePosition"
+import useURLLoader from "./hooks/useURLLoader"
 
 const count = ref<string | number>(0)
 const headLine = ref<null | HTMLElement>(null)
@@ -15,6 +16,9 @@ const user: IUser = reactive({
 })
 
 const { x, y } = useMousePosition()
+const { result, loading } = useURLLoader(
+  "https://dog.ceo/api/breeds/image/random"
+)
 
 const buttonStatus = computed(() => {
   return {
@@ -76,6 +80,8 @@ onUpdated(() => {
     <div>
       <h1>Mouse Position: x:{{ x }}, y:{{ y }}</h1>
     </div>
+    <h1 v-if="loading">Loading ...</h1>
+    <img v-else :src="result.message" alt="" />
     <h1>{{ count }}</h1>
     <h1 id="user" ref="headLine">{{ user.age }}</h1>
     <button type="button" @click="increase">increase</button>
